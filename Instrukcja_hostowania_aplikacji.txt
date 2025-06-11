@@ -1,0 +1,43 @@
+Oto zwięzła instrukcja uruchomienia aplikacji:
+1. Zainstaluj mkcert
+	Pobierz i zainstaluj mkcert:
+	[Instrukcja: https://github.com/FiloSottile/mkcert](https://github.com/FiloSottile/mkcert)
+
+2. Zainstaluj środowisko Node.js
+	Pobierz i zainstaluj [Node.js](https://nodejs.org/).
+
+3. **Zainstaluj http-server**
+	W terminalu wpisz:
+	``` bash
+	   npm install -g http-server
+	```
+
+4. **Wygeneruj certyfikaty SSL za pomocą mkcert**
+    - Utwórz katalog na certyfikaty, np. `cert`:
+	``` bash
+    	 	mkdir cert
+    	 	cd cert
+	```
+	- Wygeneruj certyfikat dla `localhost`:
+	``` bash
+     		mkcert localhost
+	```
+	- W katalogu pojawią się pliki `.pem` (np. `localhost.pem`, `localhost-key.pem`).
+
+5. **Uruchom serwer http-server z obsługą HTTPS**
+Przejdź do katalogu z plikami swojej aplikacji, np. `dist` lub `build`:
+	``` bash
+   		cd /ścieżka/do/twojej/aplikacji
+	```
+Następnie uruchom serwer:
+	``` bash
+   		http-server -S -C ../cert/localhost.pem -K ../cert/localhost-key.pem
+	```
+	Uwaga: zaktualizuj ścieżki do certyfikatów, jeśli są inne.
+
+6. **Wejdź w przeglądarce na**:
+	``` 
+   		https://localhost:8080
+	```
+Gotowe! Strona działa lokalnie przez HTTPS.
+HTTPS jest wymagany żeby odczytywać dane z telefonu.
